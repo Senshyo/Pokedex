@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios"
 import "./Pokedex.css"
+import Colors from "../Components/Colors"
 
 export default function Pokedex(){
     const [pokemons,setPokemons] = useState([])
@@ -35,7 +36,7 @@ export default function Pokedex(){
         return (
             <div className="pokeDiv" key={id}>
                 <div className="Upper">
-                    <span className="Ball"></span>
+                    <span className="Ball" style={{backgroundColor: Colors(types[0].type.name)}}></span>
                     <span className="Id">#{id.toString().padStart(3,"0")}</span>
                 </div>
                 <span className={isFavorite ? "Favorite Active" : "Favorite"} onClick={(e) => toggleFavorite(e,id)}>{isFavorite ? "❤️" : "🤍"}</span>
@@ -44,7 +45,7 @@ export default function Pokedex(){
                     <img src={sprites.versions["generation-v"]["black-white"].animated.front_default} alt={name} />
                 </div>
                 <div className="Types">
-                    {types.map(({type}) => <span className="Type" key={type.name}>{Capitalize(type.name)}</span>)}
+                    {types.map(({type}) => <span className="Type" style={{backgroundColor: Colors(type.name)}} key={type.name}>{Capitalize(type.name)}</span>)}
                 </div>
             </div>
         )
