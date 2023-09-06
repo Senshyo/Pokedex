@@ -88,7 +88,7 @@ export default function Pokedex(){
                         <img src={logoImg} alt="pokeApi" className="logoImg"/>
                     </div>
                     <label htmlFor="pesqPoke">Pesquisar: </label>
-                    <input type="text" placeholder="Nome ou ID" value={filter} onChange={(e) => setFilter(e.target.value)}/>
+                    <input type="text" placeholder="Nome ou ID" value={filter} onChange={(e) => {setFilter(e.target.value) ; setCurrentPage(1)}}/>
                 </div>
                 {
                     isModal && (
