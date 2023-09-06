@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios"
 import "./Pokedex.css"
 import Colors from "../Components/Colors"
+import logoImg from "../Images/pokeapi_256.png"
 
 export default function Pokedex(){
     const [pokemons,setPokemons] = useState([])
@@ -10,6 +11,8 @@ export default function Pokedex(){
     const [Favorites,setFavorites] = useState([])
     const [currentPage,setCurrentPage] = useState(1)
     const pokePerPage = 10
+    const [isModal,setModal] = useState(false)
+    const [selectPoke,setSelectPoke] = useState(null)
 
     useEffect(() => {
         async function fetchData(){
@@ -36,7 +39,7 @@ export default function Pokedex(){
     const pokeCard = ({name,types,id,sprites}) => {
         const isFavorite = Favorites.some((poke) => poke.id === id)
         return (
-            <div className="pokeDiv" key={id}>
+            <div className="pokeDiv" key={id} onClick={() => Modal(id)}>
                 <div className="Upper">
                     <span className="Ball" style={{backgroundColor: Colors(types[0].type.name)}}></span>
                     <span className="Id">#{id.toString().padStart(3,"0")}</span>
@@ -72,13 +75,31 @@ export default function Pokedex(){
         return currentPoke.map((poke) => pokeCard(poke))
     }
 
+    const Modal = (id) => {
+        setSelectPoke(pokemons.find((poke) => poke.id === id))
+        setModal(true)
+    }
+
     return(
         <div className="Main">
             <div className="Content">
                 <div className="Nav">
+                    <div>
+                        <img src={logoImg} alt="pokeApi" className="logoImg"/>
+                    </div>
                     <label htmlFor="pesqPoke">Pesquisar: </label>
                     <input type="text" placeholder="Nome ou ID" value={filter} onChange={(e) => setFilter(e.target.value)}/>
                 </div>
+                {
+                    isModal && (
+                        <div className="Modal">
+                            <div className="Modal-Content">
+                                {pokeCard(selectPoke)}
+                                <button onClick={() => setModal(false)}>Fechar</button>
+                            </div>
+                        </div>
+                    )
+                }
                 <div className="App">
                     {pokeDiv()}
                 </div>
