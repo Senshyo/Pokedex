@@ -53,6 +53,10 @@ export default function Pokedex(){
         )
     }
 
+    const setPage = (page) =>{
+        setCurrentPage(page)
+    }
+
     const pokefilter = filter.length > 0 ?
     isNaN(filter) ? 
     pokemons.filter((poke) => poke.name.toUpperCase().includes(filter.toUpperCase())) 
@@ -80,7 +84,7 @@ export default function Pokedex(){
                 </div>
             </div>
             <div className="Pagination">
-                {Array.from({length: Math.ceil(pokefilter.length > 0 ? pokefilter.length / pokePerPage : pokemons.length / pokePerPage)} ,(_ ,i) => <button key={i + 1}>{i + 1}</button>)}
+                {Array.from({length: Math.ceil(pokefilter.length > 0 ? pokefilter.length / pokePerPage : pokemons.length / pokePerPage)} ,(_ ,i) => <button className={currentPage === i + 1 ? "Pages ActivePage" : "Pages"} onClick={() => setPage(i + 1)} key={i + 1}>{i + 1}</button>)}
             </div>
         </div>
     )
