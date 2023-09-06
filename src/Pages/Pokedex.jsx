@@ -8,6 +8,8 @@ export default function Pokedex(){
     const [filter,setFilter] = useState("")
     const Capitalize = (str) => str.at(0).toUpperCase() + str.slice(1)
     const [Favorites,setFavorites] = useState([])
+    const [currentPage,setCurrentPage] = useState(1)
+    const pokePerPage = 10
 
     useEffect(() => {
         async function fetchData(){
@@ -51,10 +53,19 @@ export default function Pokedex(){
         )
     }
 
-    const pokefilter = filter.length > 0 ? pokemons.filter((poke) => poke.name.toUpperCase().includes(filter.toUpperCase())) : ""
+    const pokefilter = filter.length > 0 ?
+    isNaN(filter) ? 
+    pokemons.filter((poke) => poke.name.toUpperCase().includes(filter.toUpperCase())) 
+    : 
+    pokemons.filter((poke) => poke.id.toString().includes(filter))
+    :
+    ""
 
     const pokeDiv = () => {
-        return pokemons.map((poke) => pokeCard(poke))
+        const lastIndexPoke = currentPage * pokePerPage
+        const firstIndexPoke = lastIndexPoke - pokePerPage
+        const currentPoke = pokefilter.length > 0 ? pokefilter.slice(firstIndexPoke,lastIndexPoke) : pokemons.slice(firstIndexPoke,lastIndexPoke)
+        return currentPoke.map((poke) => pokeCard(poke))
     }
 
     return(
@@ -69,7 +80,7 @@ export default function Pokedex(){
                 </div>
             </div>
             <div className="Pagination">
-
+                {Array.from({length: Math.ceil(pokefilter.length > 0 ? pokefilter.length / pokePerPage : pokemons.length / pokePerPage)} ,(_ ,i) => <button key={i + 1}>{i + 1}</button>)}
             </div>
         </div>
     )
