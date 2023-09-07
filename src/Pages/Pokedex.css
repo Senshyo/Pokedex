@@ -128,6 +128,8 @@ body{
     background-color: #ddd;
     border-radius: 10px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 .Fav{
     background-color: white;
@@ -148,4 +150,7 @@ body{
 .Fav img{
     width: 60px;
     height: 60px;
+}
+.FavName{
+    align-self: center;
 }
