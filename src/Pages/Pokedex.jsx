@@ -104,6 +104,16 @@ export default function Pokedex(){
                     {pokeDiv()}
                 </div>
             </div>
+            <div className="Favoritos">
+                <h2 className="FavName">Favoritos</h2>
+                {Favorites.map((fav) =>  <div className="Fav" key={fav.id} onClick={() => Modal(fav.id)}>
+                    <div className="C">
+                    <img src={fav.sprites.versions["generation-v"]["black-white"].animated.front_default}  alt={fav.name} />
+                    <h3>{Capitalize(fav.name)}</h3>
+                    </div>
+                    <button onClick={(e) => toggleFavorite(e,fav.id)}>Remover</button>
+                </div>)}
+            </div>
             <div className="Pagination">
                 {Array.from({length: Math.ceil(pokefilter.length > 0 ? pokefilter.length / pokePerPage : pokemons.length / pokePerPage)} ,(_ ,i) => <button className={currentPage === i + 1 ? "Pages ActivePage" : "Pages"} onClick={() => setPage(i + 1)} key={i + 1}>{i + 1}</button>)}
             </div>
