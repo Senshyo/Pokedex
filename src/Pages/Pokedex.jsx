@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios"
 import "./Pokedex.css"
-import Colors from "../Components/Colors"
+
 import logoImg from "../Images/pokeapi_256.png"
 import { useNavigate } from "react-router-dom"
+import pokeCard from "../Components/pokeCard";
 
 export default function Pokedex(){
     const [pokemons,setPokemons] = useState([])
@@ -38,25 +39,7 @@ export default function Pokedex(){
         }
     }
 
-    const pokeCard = ({name,types,id,sprites}) => {
-        const isFavorite = Favorites.some((poke) => poke.id === id)
-        return (
-            <div className="pokeDiv" key={id} onClick={() => Modal(id)}>
-                <div className="Upper">
-                    <span className="Ball" style={{backgroundColor: Colors(types[0].type.name)}}></span>
-                    <span className="Id">#{id.toString().padStart(3,"0")}</span>
-                </div>
-                <span className={isFavorite ? "Favorite Active" : "Favorite"} onClick={(e) => toggleFavorite(e,id)}>{isFavorite ? "❤️" : "🤍"}</span>
-                <h2>{Capitalize(name)}</h2>
-                <div className="imgContainer">
-                    <img src={sprites.versions["generation-v"]["black-white"].animated.front_default} alt={name} />
-                </div>
-                <div className="Types">
-                    {types.map(({type}) => <span className="Type" style={{backgroundColor: Colors(type.name)}} key={type.name}>{Capitalize(type.name)}</span>)}
-                </div>
-            </div>
-        )
-    }
+    
 
     const setPage = (page) =>{
         setCurrentPage(page)
@@ -74,7 +57,7 @@ export default function Pokedex(){
         const lastIndexPoke = currentPage * pokePerPage
         const firstIndexPoke = lastIndexPoke - pokePerPage
         const currentPoke = pokefilter.length > 0 ? pokefilter.slice(firstIndexPoke,lastIndexPoke) : pokemons.slice(firstIndexPoke,lastIndexPoke)
-        return currentPoke.map((poke) => pokeCard(poke))
+        return currentPoke.map((poke) => pokeCard(poke,Favorites,Modal,toggleFavorite))
     }
 
     const Modal = (id) => {
@@ -96,7 +79,7 @@ export default function Pokedex(){
                     isModal && (
                         <div className="Modal">
                             <div className="Modal-Content">
-                                {pokeCard(selectPoke)}
+                                {pokeCard(selectPoke,Favorites,Modal,toggleFavorite)}
                                 <button onClick={() => Navigate(`/Pokemon/${selectPoke.id}`)}>Exibir Info.</button>
                                 <button onClick={() => setModal(false)}>Fechar</button>
                                 

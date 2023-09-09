@@ -1,0 +1,21 @@
+.progressBar{
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    flex-direction: column;
+}
+.fill{
+    border-radius: 5px;
+    background-color: rgb(44, 44, 231);
+    text-align: center;
+    width: 0;
+    animation: increaseWidth 1s ease forwards;
+    color: white;
+}
+
+@keyframes increaseWidth {
+    to {
+        width: var(--progressWidth);
+    }
+  }
