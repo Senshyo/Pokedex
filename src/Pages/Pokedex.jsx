@@ -3,6 +3,7 @@ import axios from "axios"
 import "./Pokedex.css"
 import Colors from "../Components/Colors"
 import logoImg from "../Images/pokeapi_256.png"
+import { useNavigate } from "react-router-dom"
 
 export default function Pokedex(){
     const [pokemons,setPokemons] = useState([])
@@ -13,6 +14,7 @@ export default function Pokedex(){
     const pokePerPage = 10
     const [isModal,setModal] = useState(false)
     const [selectPoke,setSelectPoke] = useState(null)
+    const Navigate = useNavigate()
 
     useEffect(() => {
         async function fetchData(){
@@ -95,13 +97,16 @@ export default function Pokedex(){
                         <div className="Modal">
                             <div className="Modal-Content">
                                 {pokeCard(selectPoke)}
+                                <button onClick={() => Navigate(`/Pokemon/${selectPoke.id}`)}>Exibir Info.</button>
                                 <button onClick={() => setModal(false)}>Fechar</button>
+                                
                             </div>
                         </div>
                     )
                 }
                 <div className="App">
                     {pokeDiv()}
+                    {console.log(pokemons)}
                 </div>
             </div>
             {
