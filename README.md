@@ -40,11 +40,11 @@ O aplicativo estará disponível em http://localhost:3000.
 
 ## Tecnologias Usadas
 
-React: Uma biblioteca JavaScript para criar interfaces de usuário.
+- **React:** Uma biblioteca JavaScript para criar interfaces de usuário.
 
-Axios: Um cliente HTTP baseado em promessas para fazer solicitações à API do Pokémon.
+- **Axios:** Um cliente HTTP baseado em promessas para fazer solicitações à API do Pokémon.
 
-React Router: Uma biblioteca para roteamento no aplicativo React.
+- **React Router:** Uma biblioteca para roteamento no aplicativo React.
 
 ## Contribuição
 
