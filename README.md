@@ -2,6 +2,10 @@
 
 Este projeto da Pokédex é uma aplicação web que utiliza React e integra a API do Pokémon (PokeAPI) para exibir informações sobre diferentes Pokémon. Ele permite a pesquisa de Pokémon por nome ou ID, a adição e remoção de Pokémon favoritos e a visualização de detalhes de Pokémon individualmente.
 
+## Demonstração Online
+
+Você pode experimentar o aplicativo da Pokédex clicando [Aqui](https://pokedex-tau-hazel.vercel.app/).
+
 ## Funcionalidades
 
 - **Pesquisa de Pokémon:** Você pode pesquisar Pokémon por nome ou ID na barra de pesquisa. A lista de Pokémon é atualizada dinamicamente conforme você digita.
