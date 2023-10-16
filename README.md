@@ -25,8 +25,8 @@ Antes de executar este projeto, certifique-se de ter o [Node.js](https://nodejs.
 1. Clone o repositório para o seu sistema.
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/Senshyo/Pokedex.git
+cd Pokedex
 ```
 
 2. Instale as dependências usando o npm.
